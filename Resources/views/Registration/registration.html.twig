@@ -1,0 +1,10 @@
+{% extends "MilioUserBundle::layout.html.twig" %}
+{% trans_default_domain 'MilioUserBundle' %}
+
+{% block milio_user_content %}
+
+    {{ form_start(form, {'attr' : {'class' : "form_signin" }}) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}

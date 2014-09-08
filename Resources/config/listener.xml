@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="milio_user.domain.read.projector.user_read_model_projector"
+                 class="Milio\User\Domain\Read\Projector\UserReadModelProjector">
+            <argument type="service" id="milio_user.domain.read.repository.doctrine_orm" />
+            <tag name="broadway.domain.event_listener" />
+        </service>
+
+        <service id="milio_user.domain.read.repository.doctrine_orm" class="Milio\User\Domain\Read\Repository\DoctrineORMRepository">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument>Milio\User\Domain\Read\Model\UserRead</argument>
+        </service>
+
+    </services>
+
+</container>
