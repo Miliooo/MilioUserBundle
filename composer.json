@@ -1,0 +1,32 @@
+{
+    "name": "milio/milio-user-bundle",
+    "type": "symfony-bundle",
+    "description": "User CQRS Event Sourcing",
+    "keywords": ["user", "user management"],
+    "homepage": "https://github.com/Miliooo/MilioUserBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michiel Boeckaert",
+            "email": "Boeckaert@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4",
+        "symfony/framework-bundle": "~2.3",
+        "symfony/security": "~2.3",
+        "symfony/twig-bundle": "~2.3",
+        "milio/user": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~3",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Milio\\User\\": "src"
+        }
+    }
+}
+
