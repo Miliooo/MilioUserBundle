@@ -26,6 +26,7 @@ class MilioUserExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('form.xml');
         $loader->load('controller.xml');
+        $loader->load('command_handlers.xml');
         $loader->load('provider.xml');
         $loader->load('listener.xml');
     }
