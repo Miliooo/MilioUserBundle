@@ -21,6 +21,7 @@ class LoginUserFormType extends AbstractType
         $builder->add('username', 'text', ['label' => 'form_register_label.username']);
         $builder->add('password', 'password', ['label' => 'form_register_label.password']);
         $builder->add('submit', 'submit', ['label' => 'form_register_label.submit_login']);
+        $builder->setAction('login_check');
     }
 
     /**

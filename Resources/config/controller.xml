@@ -22,6 +22,11 @@
             <argument type="service" id="templating" />
         </service>
 
+        <service id="milio_user.controller.change_password_controller"
+                  class="Milio\UserBundle\Controller\ChangePasswordController">
+            <argument type="service" id="templating" />
+        </service>
+
     </services>
 
 </container>

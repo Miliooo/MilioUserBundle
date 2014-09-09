@@ -18,7 +18,7 @@ class UserRead extends BaseUserRead implements SecurityUserInterface
      */
     public function getRoles()
     {
-        return [new Role('ROLE_USER')];
+        return ['ROLE_USER'];
     }
 
     /**

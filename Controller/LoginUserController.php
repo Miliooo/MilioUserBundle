@@ -6,6 +6,8 @@ use Milio\UserBundle\Form\Type\LoginUserFormType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * Class LoginUserController
@@ -31,7 +33,8 @@ class LoginUserController
     public function __construct(
         FormFactoryInterface $formFactory,
         EngineInterface $templating
-    ) {
+    )
+    {
         $this->formFactory = $formFactory;
         $this->templating = $templating;
     }
@@ -39,11 +42,37 @@ class LoginUserController
     /**
      * @return Response
      */
-    public function showAction()
+    public function showAction(Request $request)
     {
-        $form = $this->formFactory->create(new LoginUserFormType());
+        /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
+        $session = $request->getSession();
 
-        return $this->templating->renderResponse('MilioUserBundle:Login:login.html.twig', ['form' => $form->createView()]);
+
+        // get the error if any (works with forward and redirect -- see below)
+        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContextInterface::AUTHENTICATION_ERROR);
+        } elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+            $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
+        } else {
+            $error = '';
+        }
+
+        if ($error) {
+            $error = $error->getMessage();
+        }
+        // last username entered by the user
+        $lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
+
+
+        $data = array(
+            'last_username' => $lastUsername,
+            'error' => $error,
+            'csrf_token' => null,
+        );
+
+
+        return $this->templating->renderResponse('MilioUserBundle:Login:login.html.twig', array('data' => $data));
     }
 
     /**
