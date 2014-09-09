@@ -25,11 +25,10 @@ class MilioUserExtension extends Extension
         $loader->load('form.xml');
         $loader->load('listener.xml');
         $loader->load('provider.xml');
+        $loader->load('services.xml');
+
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
-
-
         $container->setParameter('milio_user.user_read_class', $config['user_read_class']);
         $container->setParameter('milio_user.user_write_class', $config['user_write_class']);
     }

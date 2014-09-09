@@ -14,15 +14,17 @@ use Milio\UserBundle\DependencyInjection\MilioUserExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Parser;
 
+/**
+ * Class MilioUserExtensionTest
+ *
+ * @author Michiel Boeckaert <boeckaert@gmail.com>
+ */
 class MilioUserExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @test
+     * @var ContainerBuilder
      */
-    public function test_it()
-    {
-        $loader = new MilioUserExtension();
-    }
+    private $configuration;
 
     /**
      * @test
@@ -32,11 +34,11 @@ class MilioUserExtensionTest extends \PHPUnit_Framework_TestCase
         $this->configuration = new ContainerBuilder();
         $loader = new MilioUserExtension();
         $config = $this->getEmptyConfig();
-
         $loader->load(array($config), $this->configuration);
-        $loader = new MilioUserExtension();
 
         $this->assertParameter('read_class', 'milio_user.user_read_class');
+        $this->assertParameter('write_class', 'milio_user.user_write_class');
+        $this->assertHasDefinition('milia_user.service.security_password_service');
     }
 
 
@@ -65,6 +67,11 @@ class MilioUserExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(($this->configuration->hasDefinition($id) ? : $this->configuration->hasAlias($id)));
     }
 
+    /**
+     * Gets an empty config
+     *
+     * @return mixed
+     */
     protected function getEmptyConfig()
     {
         $yaml = <<<EOF
@@ -72,8 +79,7 @@ user_read_class: read_class
 user_write_class: write_class
 EOF;
         $parser = new Parser();
+
         return $parser->parse($yaml);
     }
-
-
 }

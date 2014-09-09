@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="milio_user.service.security_encoder"
+                 class="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface"
+                 factory-service="security.encoder_factory"
+                 factory-method="getEncoder"
+                >
+            <argument>%milio_user.user_read_class%</argument>
+        </service>
+
+        <service id="milia_user.service.security_password_service"
+                 class="Milio\UserBundle\Services\SecurityPasswordService">
+            <argument type="service" id="milio_user.service.security_encoder"/>
+        </service>
+
+    </services>
+
+</container>

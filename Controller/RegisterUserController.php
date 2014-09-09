@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Broadway\CommandHandling\CommandBusInterface;
 use Broadway\CommandHandling\CommandHandlerInterface;
 use Milio\User\Domain\ValueObjects\StringUserId;
+use Milio\User\Services\Password\PasswordServiceInterface;
 
 /**
  * Class RegisterUserController
@@ -42,21 +43,29 @@ class RegisterUserController
     private $commandHandler;
 
     /**
-     * @param FormFactoryInterface    $formFactory
-     * @param EngineInterface         $templating
-     * @param CommandBusInterface     $commandBus
-     * @param CommandHandlerInterface $commandHandler
+     * @var PasswordServiceInterface
+     */
+    private $passwordService;
+
+    /**
+     * @param FormFactoryInterface     $formFactory
+     * @param EngineInterface          $templating
+     * @param CommandBusInterface      $commandBus
+     * @param CommandHandlerInterface  $commandHandler
+     * @param PasswordServiceInterface $passwordService
      */
     public function __construct(
         FormFactoryInterface $formFactory,
         EngineInterface $templating,
         CommandBusInterface $commandBus,
-        CommandHandlerInterface $commandHandler
+        CommandHandlerInterface $commandHandler,
+        PasswordServiceInterface $passwordService
     ) {
         $this->formFactory = $formFactory;
         $this->templating = $templating;
         $this->commandBus = $commandBus;
         $this->commandHandler = $commandHandler;
+        $this->passwordService = $passwordService;
     }
 
     /**
@@ -74,6 +83,7 @@ class RegisterUserController
      */
     public function updateAction(Request $request)
     {
+        $this->passwordService->getEncodedPassword('raw', 'my_hash');
         $registerUserCommand = new RegisterUserCommand(
             new StringUserId('5'),
             new BasicUsername('foo'),
