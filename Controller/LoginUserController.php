@@ -2,7 +2,6 @@
 
 namespace Milio\UserBundle\Controller;
 
-use Milio\UserBundle\Form\Type\LoginUserFormType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,6 +39,8 @@ class LoginUserController
     }
 
     /**
+     * @param Request $request
+     *
      * @return Response
      */
     public function showAction(Request $request)

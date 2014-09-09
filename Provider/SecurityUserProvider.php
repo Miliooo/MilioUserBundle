@@ -45,7 +45,7 @@ class SecurityUserProvider implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
-        $user = $this->repository->findBy(['username' => $username]);
+        $user = $this->repository->findBy(['username' => $username])[0];
 
         if (!$user) {
             throw new UsernameNotFoundException();
