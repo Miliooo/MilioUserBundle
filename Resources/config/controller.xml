@@ -16,6 +16,12 @@
             <argument type="service" id="broadway.uuid.generator" />
         </service>
 
+        <service id="milio_user.controller.login_user_controller"
+                 class="Milio\UserBundle\Controller\LoginUserController">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="templating" />
+        </service>
+
     </services>
 
 </container>
