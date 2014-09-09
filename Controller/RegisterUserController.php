@@ -83,12 +83,14 @@ class RegisterUserController
      */
     public function updateAction(Request $request)
     {
-        $this->passwordService->getEncodedPassword('raw', 'my_hash');
+        $salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+        $password = $this->passwordService->getEncodedPassword('raw', 'my_hash');
+
         $registerUserCommand = new RegisterUserCommand(
             new StringUserId('5'),
             new BasicUsername('foo'),
             'foo@bar.com',
-            new Password('hashed', 'mysalt'),
+            new Password($password, $salt),
             new \DateTime('now')
         );
 
