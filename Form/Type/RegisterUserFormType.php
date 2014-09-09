@@ -5,7 +5,6 @@ namespace Milio\UserBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Milio\User\Domain\Write\Command\RegisterUserCommand;
 
 /**
  * Form for registering new users.
@@ -43,7 +42,7 @@ class RegisterUserFormType extends AbstractType
         $resolver->setDefaults(
             [
                 'translation_domain' => 'MilioUserBundle',
-                'data_class' => 'Milio\User\Domain\Write\Command\RegisterUserCommand',
+                'data_class' => 'Milio\UserBundle\Form\Model\RegisterUserFormModel',
                 'intention' => 'register',
             ]
         );

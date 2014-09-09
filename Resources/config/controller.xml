@@ -13,6 +13,7 @@
             <argument type="service" id="broadway.command_handling.command_bus" />
             <argument type="service" id="milio_user.command_handler" />
             <argument type="service" id="milia_user.service.security_password_service" />
+            <argument type="service" id="broadway.uuid.generator" />
         </service>
 
     </services>

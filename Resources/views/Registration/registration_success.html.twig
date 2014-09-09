@@ -1,0 +1,8 @@
+{% extends "MilioUserBundle::layout.html.twig" %}
+{% trans_default_domain 'MilioUserBundle' %}
+
+{% block milio_user_content %}
+
+ Registration success for user {{ data.username }} with password {{ data.plainPassword }} and email {{ data.email }}
+
+{% endblock %}
