@@ -9,7 +9,7 @@
         <service id="milio_user.domain.read.projector.user_read_model_projector"
                  class="Milio\User\Domain\Read\Projector\UserReadModelProjector">
             <argument type="service" id="milio_user.domain.read.repository.doctrine_orm" />
-            <argument>%milio_user.user_read_class"</argument>
+            <argument>%milio_user.user_read_class%</argument>
             <tag name="broadway.domain.event_listener" />
         </service>
 
