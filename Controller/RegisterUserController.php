@@ -2,6 +2,7 @@
 
 namespace Milio\UserBundle\Controller;
 
+use Milio\User\Domain\ValueObjects\BasicUsername;
 use Milio\User\Domain\ValueObjects\Password;
 use Milio\User\Domain\Write\Command\RegisterUserCommand;
 use Milio\UserBundle\Form\Type\RegisterUserFormType;
@@ -112,7 +113,7 @@ class RegisterUserController
 
         $registerUserCommand = new RegisterUserCommand(
             new StringUserId($uuid),
-            $data->username,
+            new BasicUsername($data->username),
             $data->email,
             new Password($password, $salt),
             new \DateTime()
