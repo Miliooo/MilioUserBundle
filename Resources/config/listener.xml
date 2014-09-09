@@ -13,7 +13,7 @@
 
         <service id="milio_user.domain.read.repository.doctrine_orm" class="Milio\User\Domain\Read\Repository\DoctrineORMRepository">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument>Milio\User\Domain\Read\Model\UserRead</argument>
+            <argument>%milio_user.user_read_class%</argument>
         </service>
 
     </services>
