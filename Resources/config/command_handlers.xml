@@ -4,11 +4,6 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-
-    <parameters>
-        <parameter key="milio_user.write_model_class">Milio\User\Domain\Write\Model\UserWrite</parameter>
-    </parameters>
-
     <services>
 
          <service id="milio_user.command_handler"
