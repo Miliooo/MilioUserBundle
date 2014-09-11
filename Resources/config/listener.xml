@@ -6,16 +6,28 @@
 
     <services>
 
-        <service id="milio_user.domain.read.projector.user_read_model_projector"
-                 class="Milio\User\Domain\Read\Projector\UserReadModelProjector">
-            <argument type="service" id="milio_user.domain.read.repository.doctrine_orm" />
-            <argument>%milio_user.user_read_class%</argument>
+        <service id="milio_user.projector.view_user_profile"
+                 class="Milio\User\Domain\Read\Projector\ViewUserProfileModelProjector">
+            <argument type="service" id="milio_user.repository.user_profile" />
+            <argument>%milio_user.view.user_profile_class%</argument>
             <tag name="broadway.domain.event_listener" />
         </service>
 
-        <service id="milio_user.domain.read.repository.doctrine_orm" class="Milio\User\Domain\Read\Repository\DoctrineORMRepository">
+        <service id="milio_user.projector.view_user_security"
+                class="Milio\User\Domain\Read\Projector\ViewUserSecurityModelProjector">
+                <argument type="service" id="milio_user.repository.user_security" />
+                <argument>%milio_user.view.user_security_class%</argument>
+        </service>
+
+        <service id="milio_user.repository.user_profile" class="Milio\User\Domain\Read\Repository\DoctrineORMRepository">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument>%milio_user.user_read_class%</argument>
+            <argument>%milio_user.view.user_profile_class%</argument>
+        </service>
+
+        <service id="milio_user.repository.user_security"
+                 class="Milio\User\Domain\Read\Repository\DoctrineORMRepository">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument>%milio_user.view.user_security_class%</argument>
         </service>
 
     </services>

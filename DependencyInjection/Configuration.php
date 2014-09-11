@@ -21,8 +21,14 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('milio_user');
         $rootNode
             ->children()
-            ->scalarNode('user_read_class')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('user_write_class')->isRequired()->cannotBeEmpty()->end()
+            ->arrayNode('model_class')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->scalarNode('view_user_profile')->defaultValue('Milio\UserBundle\Entity\ViewUserProfile')->cannotBeEmpty()->end()
+                    ->scalarNode('view_user_security')->defaultValue('Milio\UserBundle\Entity\ViewUserSecurity')->cannotBeEmpty()->end()
+                    ->scalarNode('write_user_security')->defaultValue('Milio\User\Domain\Write\Model\UserSecurity')->cannotBeEmpty()->end()
+                ->end()
+            ->end()
         ->end();
 
         return $treeBuilder;

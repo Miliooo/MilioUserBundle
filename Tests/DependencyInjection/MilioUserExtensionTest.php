@@ -36,9 +36,9 @@ class MilioUserExtensionTest extends \PHPUnit_Framework_TestCase
         $config = $this->getEmptyConfig();
         $loader->load(array($config), $this->configuration);
 
-        $this->assertParameter('read_class', 'milio_user.user_read_class');
-        $this->assertParameter('write_class', 'milio_user.user_write_class');
-        $this->assertHasDefinition('milia_user.service.security_password_service');
+        $this->assertParameter('Milio\UserBundle\Entity\ViewUserProfile', 'milio_user.view.user_profile_class');
+        $this->assertParameter('Milio\UserBundle\Entity\ViewUserSecurity', 'milio_user.view.user_security_class');
+        $this->assertParameter('Milio\User\Domain\Write\Model\UserSecurity', 'milio_user.write.user_security_class');
     }
 
 
@@ -75,8 +75,7 @@ class MilioUserExtensionTest extends \PHPUnit_Framework_TestCase
     protected function getEmptyConfig()
     {
         $yaml = <<<EOF
-user_read_class: read_class
-user_write_class: write_class
+
 EOF;
         $parser = new Parser();
 

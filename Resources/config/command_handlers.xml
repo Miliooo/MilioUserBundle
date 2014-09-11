@@ -9,14 +9,14 @@
          <service id="milio_user.command_handler"
                      class="Milio\User\Domain\Write\Handler\SecurityUserCommandHandler">
              <argument type="service" id="milio_user.event_sourcing.write_repository" />
-             <argument>%milio_user.user_write_class%</argument>
+             <argument>%milio_user.write.user_security_class%</argument>
          </service>
 
          <service id="milio_user.event_sourcing.write_repository"
                     class="Milio\User\Domain\Write\Model\UserWriteEventSourcingRepository">
              <argument type="service" id="broadway.event_store"/>
              <argument type="service" id="broadway.event_handling.event_bus"/>
-             <argument>%milio_user.user_write_class%</argument>
+             <argument>%milio_user.write.user_security_class%</argument>
          </service>
 
     </services>

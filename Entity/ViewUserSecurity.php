@@ -2,14 +2,13 @@
 
 namespace Milio\UserBundle\Entity;
 
-use Milio\UserBundle\Model\Read\UserRead as BaseUserRead;
+use Milio\User\Domain\Read\Model\ViewUserSecurity as BaseViewUserSecurity;
 
 /**
  * Class UserRead
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-class UserRead extends BaseUserRead
+class ViewUserSecurity extends BaseViewUserSecurity
 {
-
 }
