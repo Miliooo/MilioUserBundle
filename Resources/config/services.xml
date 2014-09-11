@@ -11,7 +11,7 @@
                  factory-service="security.encoder_factory"
                  factory-method="getEncoder"
                 >
-            <argument>%milio_user.user_read_class%</argument>
+            <argument>%milio_user.view.user_security_class%</argument>
         </service>
 
         <service id="milia_user.service.security_password_service"

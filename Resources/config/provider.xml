@@ -8,7 +8,7 @@
 
         <service id="milio_user.provider.security_user_provider"
                 class="Milio\UserBundle\Provider\SecurityUserProvider">
-            <argument type="service" id="milio_user.domain.read.repository.doctrine_orm" />
+            <argument type="service" id="milio_user.repository.user_security" />
         </service>
 
     </services>
