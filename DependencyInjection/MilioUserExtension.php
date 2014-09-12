@@ -28,8 +28,11 @@ class MilioUserExtension extends Extension
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $container->setParameter('milio_user.view.user_profile_class', $config['model_class']['view_user_profile']);
-        $container->setParameter('milio_user.view.user_security_class', $config['model_class']['view_user_security']);
-        $container->setParameter('milio_user.write.user_security_class', $config['model_class']['write_user_security']);
+        $container->setParameter('milio_user.view.user_profile_class', $config['view_model']['view_user_profile']);
+        $container->setParameter('milio_user.view.user_security_class', $config['view_model']['view_user_security']);
+        $container->setParameter('milio_user.write.user_security_class', $config['write_model']['write_user_security']);
+        $container->setAlias('milio_user.command_handler', $config['command_handler']);
+        $container->setAlias('milio_user.projector.view_user_profile', $config['projector']['view_user_profile']);
+        $container->setAlias('milio_user.projector.view_user_security', $config['projector']['view_user_security']);
     }
 }

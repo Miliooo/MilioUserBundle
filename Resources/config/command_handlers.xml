@@ -6,7 +6,7 @@
 
     <services>
 
-         <service id="milio_user.command_handler"
+         <service id="milio_user.command_handler.default"
                      class="Milio\User\Domain\Write\Handler\SecurityUserCommandHandler">
              <argument type="service" id="milio_user.event_sourcing.write_repository" />
              <argument>%milio_user.write.user_security_class%</argument>

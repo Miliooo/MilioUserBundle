@@ -1,13 +1,5 @@
 <?php
 
-/*
-* This file is part of the MilioooFriendsBundle package.
-*
-* (c) Michiel boeckaert <boeckaert@gmail.com>
-* This source file is subject to the MIT license that is bundled
-* with this source code in the file LICENSE.
-*/
-
 namespace Milio\UserBundle\Tests\DependencyInjection;
 
 use Milio\UserBundle\DependencyInjection\MilioUserExtension;
@@ -29,7 +21,7 @@ class MilioUserExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function test_parameter()
+    public function it_has_the_required_parameters()
     {
         $this->configuration = new ContainerBuilder();
         $loader = new MilioUserExtension();
@@ -39,6 +31,36 @@ class MilioUserExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertParameter('Milio\UserBundle\Entity\ViewUserProfile', 'milio_user.view.user_profile_class');
         $this->assertParameter('Milio\UserBundle\Entity\ViewUserSecurity', 'milio_user.view.user_security_class');
         $this->assertParameter('Milio\User\Domain\Write\Model\UserSecurity', 'milio_user.write.user_security_class');
+    }
+
+    /**
+     * @test
+     */
+    public function it_has_the_required_definitions_for_command_handler()
+    {
+        $this->configuration = new ContainerBuilder();
+        $loader = new MilioUserExtension();
+        $config = $this->getEmptyConfig();
+        $loader->load(array($config), $this->configuration);
+
+        $this->assertHasDefinition('milio_user.command_handler');
+        $this->assertHasDefinition('milio_user.command_handler.default');
+    }
+
+    /**
+     * @test
+     */
+    public function it_has_the_required_definitions_for_projectors()
+    {
+        $this->configuration = new ContainerBuilder();
+        $loader = new MilioUserExtension();
+        $config = $this->getEmptyConfig();
+        $loader->load(array($config), $this->configuration);
+
+        $this->assertHasDefinition('milio_user.projector.view_user_profile.default');
+        $this->assertHasDefinition('milio_user.projector.view_user_profile');
+        $this->assertHasDefinition('milio_user.projector.view_user_security.default');
+        $this->assertHasDefinition('milio_user.projector.view_user_security');
     }
 
 
@@ -56,7 +78,7 @@ class MilioUserExtensionTest extends \PHPUnit_Framework_TestCase
      */
     private function assertHasDefinition($id)
     {
-        $this->assertTrue(($this->configuration->hasDefinition($id) ? : $this->configuration->hasAlias($id)));
+        $this->assertTrue($this->configuration->hasDefinition($id) || $this->configuration->hasAlias($id), sprintf('%s definition not found', $id));
     }
 
     /**
