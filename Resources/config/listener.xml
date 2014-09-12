@@ -4,17 +4,22 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="milio_user.projector.view_user_profile.class">Milio\User\Domain\Read\Projector\ViewUserProfileModelProjector</parameter>
+        <parameter key="milio_user.projector.view_user_security.class">Milio\User\Domain\Read\Projector\ViewUserSecurityModelProjector</parameter>
+    </parameters>
+
     <services>
 
         <service id="milio_user.projector.view_user_profile.default"
-                 class="Milio\User\Domain\Read\Projector\ViewUserProfileModelProjector">
+                 class="%milio_user.projector.view_user_profile.class%">
             <argument type="service" id="milio_user.repository.user_profile" />
             <argument>%milio_user.view.user_profile_class%</argument>
             <tag name="broadway.domain.event_listener" />
         </service>
 
         <service id="milio_user.projector.view_user_security.default"
-                class="Milio\User\Domain\Read\Projector\ViewUserSecurityModelProjector">
+                class="%milio_user.projector.view_user_security.class%">
                 <argument type="service" id="milio_user.repository.user_security" />
                 <argument>%milio_user.view.user_security_class%</argument>
                 <tag name="broadway.domain.event_listener"/>

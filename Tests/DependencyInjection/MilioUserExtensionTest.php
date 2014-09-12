@@ -31,6 +31,8 @@ class MilioUserExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertParameter('Milio\UserBundle\Entity\ViewUserProfile', 'milio_user.view.user_profile_class');
         $this->assertParameter('Milio\UserBundle\Entity\ViewUserSecurity', 'milio_user.view.user_security_class');
         $this->assertParameter('Milio\User\Domain\Write\Model\UserSecurity', 'milio_user.write.user_security_class');
+        $this->assertParameter('acme/demo/profile_projector', 'milio_user.projector.view_user_profile.class');
+        $this->assertParameter('acme/demo/security_projector', 'milio_user.projector.view_user_security.class');
     }
 
     /**
@@ -57,10 +59,6 @@ class MilioUserExtensionTest extends \PHPUnit_Framework_TestCase
         $config = $this->getEmptyConfig();
         $loader->load(array($config), $this->configuration);
 
-        $this->assertHasDefinition('milio_user.projector.view_user_profile.default');
-        $this->assertHasDefinition('milio_user.projector.view_user_profile');
-        $this->assertHasDefinition('milio_user.projector.view_user_security.default');
-        $this->assertHasDefinition('milio_user.projector.view_user_security');
     }
 
 
@@ -71,6 +69,11 @@ class MilioUserExtensionTest extends \PHPUnit_Framework_TestCase
     private function assertParameter($value, $key)
     {
         $this->assertEquals($value, $this->configuration->getParameter($key), sprintf('%s parameter is correct', $key));
+    }
+
+    private function assertDefinition($id)
+    {
+       var_dump($this->configuration->getDefinition($id));
     }
 
     /**
@@ -97,7 +100,9 @@ class MilioUserExtensionTest extends \PHPUnit_Framework_TestCase
     protected function getEmptyConfig()
     {
         $yaml = <<<EOF
-
+projector:
+    view_user_profile_class: acme/demo/profile_projector
+    view_user_security_class: acme/demo/security_projector
 EOF;
         $parser = new Parser();
 
