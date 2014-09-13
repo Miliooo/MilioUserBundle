@@ -25,6 +25,7 @@ class MilioUserExtension extends Extension
         $loader->load('listener.xml');
         $loader->load('provider.xml');
         $loader->load('services.xml');
+        $loader->load('presenters.xml');
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
