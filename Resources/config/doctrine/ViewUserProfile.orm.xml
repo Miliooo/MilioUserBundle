@@ -13,6 +13,6 @@ http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
         </id>
         <field name="userId" type="string" column="user_id" length="36"/>
         <field name="username" column="username" type="string" length="50"/>
-        <field name="isDeleted" column="is_deleted" type="boolean"/>
+        <field name="accountStatus" column="account_status" type="string" length="150"/>
     </mapped-superclass>
 </doctrine-mapping>
