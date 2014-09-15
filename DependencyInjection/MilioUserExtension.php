@@ -26,6 +26,7 @@ class MilioUserExtension extends Extension
         $loader->load('provider.xml');
         $loader->load('services.xml');
         $loader->load('presenters.xml');
+        $loader->load('miliocqrs.xml'); //will need to add this in it's own bundle or get it in broadway let's do it here for now.
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);

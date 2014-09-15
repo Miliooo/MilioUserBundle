@@ -1,23 +1,23 @@
 <?xml version="1.0" ?>
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
 
-         <service id="milio_user.command_handler.default"
-                     class="Milio\User\Domain\Write\Handler\SecurityUserCommandHandler">
-             <argument type="service" id="milio_user.event_sourcing.write_repository" />
-             <argument>%milio_user.write.user_security_class%</argument>
-         </service>
+        <service id="milio_user.command_handler.default"
+                 class="Milio\User\Domain\Write\Handler\SecurityUserCommandHandler">
+            <argument type="service" id="milio_user.event_sourcing.write_repository" />
+            <argument>%milio_user.write.user_security_class%</argument>
+        </service>
 
-         <service id="milio_user.event_sourcing.write_repository"
-                    class="Milio\User\Domain\Write\Model\UserWriteEventSourcingRepository">
-             <argument type="service" id="broadway.event_store"/>
-             <argument type="service" id="broadway.event_handling.event_bus"/>
-             <argument>%milio_user.write.user_security_class%</argument>
-         </service>
+        <service id="milio_user.event_sourcing.write_repository"
+                 class="Milio\User\Domain\Write\Model\UserWriteEventSourcingRepository">
+            <argument type="service" id="broadway.event_store"/>
+            <argument type="service" id="broadway.event_handling.event_bus"/>
+            <argument>%milio_user.write.user_security_class%</argument>
+        </service>
 
     </services>
 

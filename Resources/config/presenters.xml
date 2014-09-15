@@ -1,14 +1,15 @@
 <?xml version="1.0" ?>
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-     <services>
-        <service id="milio_user.presenter.factory" class="Milio\User\Domain\Read\Presenter\UserProfilePresenterFactory" />
+    <services>
 
-         <service id="milio_user.presenter.null" class="Milio\User\Domain\Read\Presenter\NullUserProfilePresenter" />
-         <service id="milio_user.presenter.active" class="Milio\User\Domain\Read\Presenter\ActiveUserProfilePresenter" />
+        <service id="milio_user.presenter.factory" class="Milio\User\Domain\Read\Presenter\UserProfilePresenterFactory" />
+        <service id="milio_user.presenter.null" class="Milio\User\Domain\Read\Presenter\NullUserProfilePresenter" />
+        <service id="milio_user.presenter.active" class="Milio\User\Domain\Read\Presenter\ActiveUserProfilePresenter" />
+
     </services>
 
 </container>

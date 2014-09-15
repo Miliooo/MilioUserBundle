@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
@@ -19,21 +19,10 @@
         </service>
 
         <service id="milio_user.projector.view_user_security.default"
-                class="%milio_user.projector.view_user_security.class%">
-                <argument type="service" id="milio_user.repository.user_security" />
-                <argument>%milio_user.view.user_security_class%</argument>
-                <tag name="broadway.domain.event_listener"/>
-        </service>
-
-        <service id="milio_user.repository.user_profile" class="Milio\User\Domain\Read\Repository\DoctrineORMRepository">
-            <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument>%milio_user.view.user_profile_class%</argument>
-        </service>
-
-        <service id="milio_user.repository.user_security"
-                 class="Milio\User\Domain\Read\Repository\DoctrineORMRepository">
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+                 class="%milio_user.projector.view_user_security.class%">
+            <argument type="service" id="milio_user.repository.user_security" />
             <argument>%milio_user.view.user_security_class%</argument>
+            <tag name="broadway.domain.event_listener"/>
         </service>
 
     </services>
