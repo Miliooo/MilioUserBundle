@@ -6,6 +6,9 @@
 
      <services>
         <service id="milio_user.presenter.factory" class="Milio\User\Domain\Read\Presenter\UserProfilePresenterFactory" />
+
+         <service id="milio_user.presenter.null" class="Milio\User\Domain\Read\Presenter\NullUserProfilePresenter" />
+         <service id="milio_user.presenter.active" class="Milio\User\Domain\Read\Presenter\ActiveUserProfilePresenter" />
     </services>
 
 </container>
