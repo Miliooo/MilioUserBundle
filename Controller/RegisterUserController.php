@@ -12,10 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Broadway\CommandHandling\CommandBusInterface;
 use Broadway\CommandHandling\CommandHandlerInterface;
-use Milio\User\Domain\ValueObjects\StringUserId;
 use Milio\User\Services\Password\PasswordServiceInterface;
 use Milio\UserBundle\Form\Model\RegisterUserFormModel;
-use Broadway\Uuid\UuidGeneratorInterface;
+use Milio\User\Domain\ValueObjects\UserId;
 
 /**
  * Class RegisterUserController
@@ -50,11 +49,6 @@ class RegisterUserController
     private $passwordService;
 
     /**
-     * @var UuidGeneratorInterface
-     */
-    private $uuidGenerator;
-
-    /**
      * Constructor.
      *
      * @param FormFactoryInterface     $formFactory
@@ -62,22 +56,19 @@ class RegisterUserController
      * @param CommandBusInterface      $commandBus
      * @param CommandHandlerInterface  $commandHandler
      * @param PasswordServiceInterface $passwordService
-     * @param UuidGeneratorInterface   $uuidGenerator
      */
     public function __construct(
         FormFactoryInterface $formFactory,
         EngineInterface $templating,
         CommandBusInterface $commandBus,
         CommandHandlerInterface $commandHandler,
-        PasswordServiceInterface $passwordService,
-        UuidGeneratorInterface $uuidGenerator
+        PasswordServiceInterface $passwordService
     ) {
         $this->formFactory = $formFactory;
         $this->templating = $templating;
         $this->commandBus = $commandBus;
         $this->commandHandler = $commandHandler;
         $this->passwordService = $passwordService;
-        $this->uuidGenerator = $uuidGenerator;
     }
 
     /**
@@ -107,12 +98,12 @@ class RegisterUserController
         /** @var RegisterUserFormModel $data */
         $data = $form->getData();
 
-        $uuid = $this->uuidGenerator->generate();
+
         $salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
         $password = $this->passwordService->getEncodedPassword($data->plainPassword, $salt);
 
         $registerUserCommand = new RegisterUserCommand(
-            new StringUserId($uuid),
+            UserId::generate(),
             new BasicUsername($data->username),
             $data->email,
             new Password($password, $salt),
