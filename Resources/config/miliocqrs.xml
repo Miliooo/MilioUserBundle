@@ -15,16 +15,16 @@
                  class="Milio\CQRS\ReadModel\DoctrineORM\DoctrineORMRepository"
                  factory-service="milio_cqrs.readmodel.doctrine_orm_factory"
                  factory-method="create">
-            <argument>%milio_user.view.user_profile_class%</argument>
             <argument>userId</argument>
+            <argument>%milio_user.view.user_profile_class%</argument>
         </service>
 
         <service id="milio_user.repository.user_security"
                  class="Milio\CQRS\ReadModel\DoctrineORM\DoctrineORMRepository"
                  factory-service="milio_cqrs.readmodel.doctrine_orm_factory"
                  factory-method="create">
-            <argument>%milio_user.view.user_security_class%</argument>
             <argument>userId</argument>
+            <argument>%milio_user.view.user_security_class%</argument>
         </service>
 
     </services>
