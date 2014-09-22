@@ -19,8 +19,7 @@
         "symfony/twig-bundle": "~2.3",
         "symfony/form": "~2.3",
         "milio/user": "dev-master",
-        "milio/cqrs-es": "dev-master",
-        "broadway/broadway": "0.2.x-dev"
+        "milio/cqrs-es": "dev-master"
     },
 
     "require-dev": {
